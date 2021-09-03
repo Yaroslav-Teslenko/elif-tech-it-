@@ -1,44 +1,75 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>{{ 'Create' | localize }}</h3>
+      <h3>Банки</h3>
 
       <button class="btn waves-effect waves-light btn-small" @click="refresh">
         <i class="material-icons">refresh</i>
       </button>
     </div>
     <Loader v-if="loading" />
+    <p class="center" v-else-if="!banks.length">
+      Записей пока нет.
+      <router-link to="/new-bank">Добавить банк</router-link>
+    </p>
     <div v-else class="row">
-      <HomeBill :rates="currency.rates" />
-      <HomeCurrency :rates="currency.rates" :date="currency.date" />
+      <ul class="collapsible">
+        <li>
+          <div class="collapsible-header">
+            <i class="material-icons">filter_drama</i>First
+          </div>
+          <div class="collapsible-body">
+            <span>Lorem ipsum dolor sit amet.</span>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header">
+            <i class="material-icons">place</i>Second
+          </div>
+          <div class="collapsible-body">
+            <span>Lorem ipsum dolor sit amet.</span>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header">
+            <i class="material-icons">whatshot</i>Third
+          </div>
+          <div class="collapsible-body">
+            <span>Lorem ipsum dolor sit amet.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="fixed-action-btn">
+      <router-link
+        class="btn-floating btn-large blue"
+        to="/new-bank"
+        v-tooltip="'Добавить банк'"
+      >
+        <i class="large material-icons">add</i>
+      </router-link>
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HomeBill from '@/components/HomeBill.vue'
-import HomeCurrency from '@/components/HomeCurrency.vue'
+
 export default {
   name: 'Home',
-  metaInfo() {
-    return {
-      title: this.$title('Menu_Bill'),
-    }
-  },
-  data: () => ({ loading: true }),
+  data: () => ({ banks: [], loading: true }),
   async mounted() {
-    this.currency = await this.$store.dispatch('fetchCurrency')
-    //console.log(this.currency);
+    this.banks = await this.$store.dispatch('fetchBanks')
+    console.log(this.banks)
     this.loading = false
   },
   methods: {
     async refresh() {
       this.loading = true
-      this.currency = await this.$store.dispatch('fetchCurrency')
+      //  this.currency = await this.$store.dispatch('fetchCurrency')
       this.loading = false
     },
   },
-  components: { HomeBill, HomeCurrency },
+  components: {},
 }
 </script>

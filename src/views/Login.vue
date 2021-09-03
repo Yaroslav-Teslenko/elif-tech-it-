@@ -1,7 +1,7 @@
 <template>
   <form class="card auth-card" @submit.prevent="submitHandler">
     <div class="card-content">
-      <span class="card-title">{{ 'CRM_Title' | localize }}</span>
+      <span class="card-title">Войти </span>
       <div class="input-field">
         <input
           id="email"
@@ -80,11 +80,6 @@ import messages from '@/utils/messages'
 
 export default {
   name: 'login',
-  metaInfo() {
-    return {
-      title: this.$title('Login'),
-    }
-  },
   data: () => ({ email: 'v@gmail.com', password: 'TZuTPrud72' }),
   validations: {
     email: { email, required },
@@ -111,7 +106,6 @@ export default {
     },
   },
   mounted() {
-    //console.log("ggg" + this.$route.query.message);
     if (messages[this.$route.query.message]) {
       this.$message(messages[this.$route.query.message])
     }

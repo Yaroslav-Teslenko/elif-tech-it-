@@ -1,21 +1,13 @@
-// import { createApp } from "vue";
-// import App from "./App.vue";
-// import "./registerServiceWorker";
-// import router from "./router";
-// import store from "./store";
-// import "materialize-css/dist/js/materialize.min";
-
 import Vue from 'vue'
 import Vuelidate from 'vuelidate'
-import Paginate from 'vuejs-paginate'
+
 import App from './App.vue'
 import router from './router'
 import store from './store'
 import dateFilter from '@/filters/date.filters'
-import currencyFilter from '@/filters/currency.filters'
-import localizeFilter from '@/filters/localize.filter'
+
 import messagePlugin from '@/utils/message.plugin'
-import titlePlugin from '@/utils/title.plugin'
+
 import tooltipDirective from '@/directives/tooltip.directive.js'
 import Loader from '@/components/app/loader.vue'
 import firebase from 'firebase/app'
@@ -27,25 +19,24 @@ import 'materialize-css/dist/js/materialize.min'
 
 Vue.use(Vuelidate)
 Vue.use(messagePlugin)
-Vue.use(titlePlugin)
+
 Vue.component('Loader', Loader)
 // теперь в каждом компоненте появляется св-во validations
-Vue.component('Paginate', Paginate)
 
 Vue.filter('date', dateFilter)
-Vue.filter('currency', currencyFilter)
-Vue.filter('localize', localizeFilter)
+
 Vue.directive('tooltip', tooltipDirective)
 
 Vue.config.productionTip = false
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAoj58hTnaPUA58akql2L-BLIvHiy2NoMo',
-  authDomain: 'vue-crm-81a51.firebaseapp.com',
-  projectId: 'vue-crm-81a51',
-  storageBucket: 'vue-crm-81a51.appspot.com',
-  messagingSenderId: '562520898364',
-  appId: '1:562520898364:web:8f64c9ed7480ff38043c39'
+  apiKey: 'AIzaSyCyEQc_FmL5pVrKHp9YMRzjf4JXs3f2xVg',
+  authDomain: 'elfi-test.firebaseapp.com',
+  databaseURL: 'https://elfi-test-default-rtdb.firebaseio.com',
+  projectId: 'elfi-test',
+  storageBucket: 'elfi-test.appspot.com',
+  messagingSenderId: '260187137846',
+  appId: '1:260187137846:web:a8030f7be1998690e53597'
 }
 
 firebase.initializeApp(firebaseConfig)
@@ -63,5 +54,3 @@ firebase.auth().onAuthStateChanged(() => {
 //которые позволят поддерживать авто-авторизацию
 //если cb сработает, то тогда выз-ем рендер приложения
 //  + проверяем, не было ли пр-е  app уже запущенно
-
-//TODO проверить рзботу  с другими версиями node.

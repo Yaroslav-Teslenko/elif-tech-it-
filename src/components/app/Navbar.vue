@@ -5,7 +5,7 @@
         <a href="#" @click.prevent="$emit('SidebarToggle')">
           <i class="material-icons black-text">dehaze</i>
         </a>
-        <span class="black-text">{{ date | date("datetime") }}</span>
+        <span class="black-text">{{ date | date('datetime') }}</span>
       </div>
 
       <ul class="right hide-on-small-and-down">
@@ -24,14 +24,14 @@
             <li>
               <router-link to="/profile" class="black-text">
                 <i class="material-icons">account_circle</i>
-                {{ "ProfileTitle" | localize }}
+                {{ 'ProfileTitle' }}
               </router-link>
             </li>
             <li class="divider" tabindex="-1"></li>
             <li>
               <a href="#" class="black-text" @click.prevent="logout">
                 <i class="material-icons">assignment_return</i>
-                {{ "Exit" | localize }}
+                {{ 'Exit' }}
               </a>
             </li>
           </ul>
@@ -41,44 +41,35 @@
   </nav>
 </template>
 <script>
-import { setInterval, clearInterval } from "timers";
+import { setInterval, clearInterval } from 'timers'
 export default {
   data: () => ({ date: new Date(), interval: null, dropdown: null }),
 
   methods: {
     async logout() {
-      await this.$store.dispatch("logout");
-      this.$router.push("/login?message=logout");
+      await this.$store.dispatch('logout')
+      this.$router.push('/login?message=logout')
     },
   },
   mounted() {
     this.interval = setInterval(() => {
-      this.date = new Date();
-    }, 1000);
-
-    // можно использовать js указания на элемент (selectbyid и тд), но
-    //используем ref для указания на dropdown
-    // <a
-    //   class="dropdown-trigger black-text"
-    //   href="#"
-    //   data-target="dropdown"
-    //   ref="dropdown"
-    // >
+      this.date = new Date()
+    }, 1000)
 
     this.dropdown = M.Dropdown.init(this.$refs.dropdown, {
       constrainWidth: true,
-    });
+    })
   },
   beforeDestroy() {
-    clearInterval(this.interval);
+    clearInterval(this.interval)
     if (this.dropdown && this.dropdown.destroy) {
-      this.dropdown.destroy();
+      this.dropdown.destroy()
     }
   },
   computed: {
     name() {
-      return this.$store.getters.info.name;
+      return this.$store.getters.info.name
     },
   },
-};
+}
 </script>

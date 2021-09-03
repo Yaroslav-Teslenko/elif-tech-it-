@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>{{'ProfileTitle' | localize}}</h3>
+      <h3>ProfileTitle</h3>
     </div>
 
     <form class="form" @submit.prevent="submitHandler">
@@ -10,26 +10,18 @@
           id="description"
           type="text"
           v-model="name"
-          :class="{invalid: $v.name.$dirty && !$v.name.required}"
-        >
-        <label for="description">{{'Name'|localize}}</label>
+          :class="{ invalid: $v.name.$dirty && !$v.name.required }"
+        />
+        <label for="description">Name</label>
         <small
           class="helper-text invalid"
           v-if="$v.name.$dirty && !$v.name.required"
-        >{{'Message_EnterName'|localize}}</small>
-      </div>
-
-      <div class="switch">
-        <label>
-          English
-          <input type="checkbox" v-model="isRuLocale">
-          <span class="lever"></span>
-          Русский
-        </label>
+          >Message_EnterName</small
+        >
       </div>
 
       <button class="btn waves-effect waves-light" type="submit">
-        {{'Update'|localize}}
+        Update
         <i class="material-icons right">send</i>
       </button>
     </form>
@@ -39,29 +31,24 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import { required } from 'vuelidate/lib/validators'
-import localeFilter from '@/filters/localize.filter'
+
 export default {
-  metaInfo() {
-    return {
-      title: this.$title('ProfileTitle')
-    }
-  },
   data: () => ({
     name: '',
-    isRuLocale: true
+    isRuLocale: true,
   }),
   validations: {
-    name: { required }
+    name: { required },
   },
   mounted() {
     this.name = this.info.name
-    this.isRuLocale = this.info.locale === 'ru-RU'
+
     setTimeout(() => {
       M.updateTextFields()
     })
   },
   computed: {
-    ...mapGetters(['info'])
+    ...mapGetters(['info']),
   },
   methods: {
     ...mapActions(['updateInfo']),
@@ -74,11 +61,10 @@ export default {
       try {
         await this.updateInfo({
           name: this.name,
-          locale: this.isRuLocale ? 'ru-RU' : 'en-US'
         })
       } catch (e) {}
-    }
-  }
+    },
+  },
 }
 </script>
 
