@@ -42,6 +42,12 @@ const routes = [
     name: 'new-bank',
     meta: { layout: 'main', auth: true },
     component: () => import('../views/BankEdit.vue')
+  },
+  {
+    path: '/edit-bank/:id',
+    name: 'edit-bank',
+    meta: { layout: 'main', auth: true },
+    component: () => import('../views/BankEdit.vue')
   }
 ]
 

@@ -13,7 +13,7 @@ import Loader from '@/components/app/loader.vue'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
-// обезличеные импорты ( не имп-ют объект) всегда ставить в конец
+
 import './registerServiceWorker'
 import 'materialize-css/dist/js/materialize.min'
 
@@ -21,7 +21,6 @@ Vue.use(Vuelidate)
 Vue.use(messagePlugin)
 
 Vue.component('Loader', Loader)
-// теперь в каждом компоненте появляется св-во validations
 
 Vue.filter('date', dateFilter)
 
@@ -50,7 +49,3 @@ firebase.auth().onAuthStateChanged(() => {
     }).$mount('#app')
   }
 })
-//метод будет вызываться, когда фб найдет какие-либо локальныш данные полиьзователз
-//которые позволят поддерживать авто-авторизацию
-//если cb сработает, то тогда выз-ем рендер приложения
-//  + проверяем, не было ли пр-е  app уже запущенно

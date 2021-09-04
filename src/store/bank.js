@@ -5,10 +5,29 @@ export default {
     async createBank({ dispatch, commit }, record) {
       try {
         const uid = await dispatch('getUid')
+        //console.log(record)
         return await firebase
           .database()
-          .ref(`/users/${uid}/records`)
+          .ref(`/users/${uid}/banks`)
           .push(record)
+      } catch (e) {
+        commit('setError', e)
+        throw e
+      }
+    },
+
+    async updateBank(
+      { commit, dispatch },
+      { id, name, interestRate, maxLoan, minDownPayment, loanTerm }
+    ) {
+      console.log('updateBank')
+      try {
+        const uid = await dispatch('getUid')
+        await firebase
+          .database()
+          .ref(`/users/${uid}/banks`)
+          .child(id)
+          .update({ name, interestRate, maxLoan, minDownPayment, loanTerm })
       } catch (e) {
         commit('setError', e)
         throw e
@@ -42,6 +61,23 @@ export default {
               .once('value')
           ).val() || {}
         return { ...record, id }
+      } catch (e) {
+        commit('setError', e)
+        throw e
+      }
+    },
+    async deleteBankById({ dispatch, commit }, id) {
+      try {
+        console.log('jjj')
+        const uid = await dispatch('getUid')
+
+        await firebase
+          .database()
+          .ref(`/users/${uid}/banks`)
+          .child(id)
+          .remove()
+
+        return 'ok'
       } catch (e) {
         commit('setError', e)
         throw e

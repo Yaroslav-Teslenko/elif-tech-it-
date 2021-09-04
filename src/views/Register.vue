@@ -54,8 +54,6 @@
           Пароль должен быть {{ $v.password.$params.minLength.min }}. Сейчас он
           {{ password.length }}
         </small>
-
-        <!-- TODO  $v.password.$params.minLength.min  -->
       </div>
       <div class="input-field">
         <input
@@ -98,7 +96,6 @@
   </form>
 </template>
 <script>
-//import { defineComponent } from "@vue/composition-api";
 import { email, required, minLength } from 'vuelidate/lib/validators'
 
 export default {
@@ -123,12 +120,9 @@ export default {
       }
 
       try {
-        // redirect  если без ошибок
         await this.$store.dispatch('register', formData)
         this.$router.push('/')
-      } catch (err) {
-        // оставляем пустой, потому что будем обрабатывать в store
-      }
+      } catch (err) {}
     },
   },
 }
