@@ -143,6 +143,8 @@ export default {
         this.monthlyPayment =
           (this.initialLoan * (1 + this.interestRate / 12) ** this.loanTerm) /
           ((1 + this.interestRate / 12) ** this.loanTerm - 1)
+        this.monthlyPayment = Math.floor(this.monthlyPayment, 2)
+
         //console.log(this.monthlyPayment)
       } catch (error) {}
       if (isNaN(this.monthlyPayment)) {

@@ -80,10 +80,10 @@ import messages from '@/utils/messages'
 
 export default {
   name: 'login',
-  data: () => ({ email: 'v@gmail.com', password: 'TZuTPrud72' }),
+  data: () => ({ email: '', password: '' }),
   validations: {
     email: { email, required },
-    password: { required, minLength: minLength(1) },
+    password: { required, minLength: minLength(3) },
   },
   methods: {
     async submitHandler() {
