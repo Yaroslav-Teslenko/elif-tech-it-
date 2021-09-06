@@ -140,9 +140,10 @@ export default {
       this.errMessage = []
       this.errYes = false
       try {
-        this.monthlyPayment =
-          (this.initialLoan * (1 + this.interestRate / 12) ** this.loanTerm) /
-          ((1 + this.interestRate / 12) ** this.loanTerm - 1)
+        const a = this.interestRate / 12
+        const b = (1 + this.interestRate / 12) ** this.loanTerm
+
+        this.monthlyPayment = (this.initialLoan * a * b) / (b - 1)
         this.monthlyPayment = Math.floor(this.monthlyPayment, 2)
 
         //console.log(this.monthlyPayment)

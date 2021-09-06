@@ -103,7 +103,7 @@ export default {
   data: () => ({ email: '', password: '', name: '', agree: false }),
   validations: {
     email: { email, required },
-    password: { required, minLength: minLength(1) },
+    password: { required, minLength: minLength(6) },
     name: { required },
     agree: { checked: (v) => v },
   },
